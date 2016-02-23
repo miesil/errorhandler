@@ -186,7 +186,7 @@ function stringify(val) {
     return String(stack)
   }
 
-  var str = String(val)
+  var str = val.message ? val.message : String(val)
 
   return str === toString.call(val)
     ? inspect(val)
