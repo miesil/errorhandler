@@ -116,9 +116,11 @@ exports = module.exports = function errorHandler(options) {
 
     // html
     if (type === 'html') {
-      fs.readFile(__dirname + '/public/style.css', 'utf8', function(e, style){
+      var cssFile = opts.cssFile ? opts.cssFile : __dirname + '/public/style.css';
+      var htmlFile = opts.htmlFile ? opts.htmlFile : __dirname + '/public/error.html';
+      fs.readFile(cssFile, 'utf8', function(e, style){
         if (e) return next(e);
-        fs.readFile(__dirname + '/public/error.html', 'utf8', function(e, html){
+        fs.readFile(htmlFile, 'utf8', function(e, html){
           if (e) return next(e);
           var isInspect = !err.stack && String(err) === toString.call(err)
           var errorHtml = !isInspect
